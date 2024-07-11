@@ -7,14 +7,15 @@
 using namespace std;
 
 int main(){
-    char arr[8] = "MALWARE";
-
     string _directory;
+    string keyword;
+    cout<<"Aranacak ifadeyi giriniz : ";
+    cin>>keyword;
     cout<<"Dosya Dizinini Giriniz :\n ";
     cin>>_directory;
 
+
     char *arr2 = ReadAllBytes(_directory);
-    int fileSize = get_file_size(_directory);                            
-    cout<<fileSize<<endl;                                          
-    search(arr2, fileSize, arr);
+    int fileSize = get_file_size(_directory);
+    search(arr2, fileSize, keyword.c_str());
 }
