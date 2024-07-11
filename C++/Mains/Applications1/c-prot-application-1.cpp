@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../../Headers/ReadAllBytes.h"
+#include "../../Headers/Methods.h"
 
 
 using namespace std;
@@ -17,8 +17,8 @@ int main(){
     char *arr = ReadAllBytes(_directory); //(TR) Dödürülen diziyi tutan dizimiza atama yaptık
                                           //(EN) We assigned the returned array to our array that holds the array
 
-
     ofstream file2 ("first2bytes.txt", ios::out | ios::binary);
+    
     for(int i =0; i<2; i++){
         file2<<arr[i];
     }
