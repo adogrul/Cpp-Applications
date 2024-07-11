@@ -9,9 +9,9 @@ using namespace std;
 int main(){
     string _directory;
     string keyword;
-    cout<<"Aranacak ifadeyi giriniz : ";
+    cout<<"Aranacak ifadeyi giriniz (Enter the expression to search for) : ";
     cin>>keyword;
-    cout<<"Dosya Dizinini Giriniz :\n ";
+    cout<<"Dosya Dizinini Giriniz (Enter the file's directory) :\n ";
     cin>>_directory;
 
 
