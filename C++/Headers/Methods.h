@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 using namespace std;
 
 int get_file_size(string _directory){
@@ -28,7 +29,7 @@ char* ReadAllBytes(string _directory){
     }
 
     char* arr = new char[fileSize + 1]();//(TR) Statik bir dizi sabit bir ifade bekleyeceği için hata verir bu yüzden dinamik bir dizi oluşturuldu. 
-        // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.
+    // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.
     file.read(arr, fileSize);                               
     file.close();
     return arr;
@@ -60,9 +61,7 @@ void search(const char *arr2, int fileSize, const char *arr){
             // (EN) The temp array is deleted to prevent memory leakage.
             break;
         }
-
         delete[] temp;
-
     }
 
     if (!flag)
