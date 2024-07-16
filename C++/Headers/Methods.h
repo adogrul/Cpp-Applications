@@ -50,7 +50,7 @@ void search(const char *arr2, int fileSize, const char *arr){
         char* temp = new char[length + 1]; //(TR) Statik bir dizi sabit bir ifade bekleyeceği için hata verir bu yüzden dinamik bir dizi oluşturuldu. 
         // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.
         
-        strncpy(temp, arr2 + i, length); //(TR) arr2 + i ifadesi arama yapılacak dosyanın i. karakterinden başlayarak length kadar karakteri temp dizisine kopyalar.
+        strncpy_s(temp,length+1, arr2 + i, length); //(TR) arr2 + i ifadesi arama yapılacak dosyanın i. karakterinden başlayarak length kadar karakteri temp dizisine kopyalar.
         // (EN) The expression arr2 + i copies the characters of the file to be searched starting from the i. character to the temp array for length characters.
         temp[length] = '\0';
         
