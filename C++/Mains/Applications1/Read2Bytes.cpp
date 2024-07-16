@@ -19,6 +19,7 @@ int main(){
     for(int i =0; i<2; i++){
         file2<<arr[i];
     }
+    cout<<arr[0]<<arr[1]<<endl;
 
     return 0;
 }

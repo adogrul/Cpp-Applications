@@ -88,24 +88,26 @@ void search(string path ,const char *arr){
 }
 
 
-vector<string> listFiles(string& path) {
-/*(TR) Klasördeki dosyaları listeler.
+vector<string> listFiles(const string& path) {/*(TR) Klasördeki dosyaları listeler.
 (EN) Lists the files in the folder.
 */
     vector<string> directories;
-    int count = 0;
-   for (const auto& entry : fs::directory_iterator(path)) {
-        if (fs::is_regular_file(entry)) {  /*(TR) filesystema kütüphanesinin is_regular_file fonksiyonu ile dosya kontrolü yapılır.
-        (EN) 
-        */
-            cout << count+1<<" - "<<entry.path() << endl;
-            directories.push_back(entry.path().string());
-            count++;
+
+    try {
+        for (const auto& entry : fs::recursive_directory_iterator(path)) {
+            if (fs::is_regular_file(entry)) {/*
+                (TR) Eğer dosya ise ekrana yazdırır ve vektöre ekler.
+                (EN) If it is a file, it prints to the screen and adds to the vector.
+            */
+                cout << entry.path() << endl;
+                directories.push_back(entry.path().string());
+            }
         }
+    } catch (const filesystem::filesystem_error& ex) {
+        cerr << "Hata oluştu: " << ex.what() << endl;
     }
 
-    cout << "Toplam(Totaly) " << count << " dosya bulundu(file found)\n Okuma Başarılı(Reading Succesful)\n\n---------------------------------\n\n";
-    
+    cout << "Toplam " << directories.size() << " dosya bulundu\nOkuma Başarılı\n\n---------------------------------\n\n";
     return directories;
 }
 
