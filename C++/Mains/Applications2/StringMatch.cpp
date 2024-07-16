@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <fstream>
 #include <string.h>
-#include <cstring>
 #include "../../Headers/Methods.h"
 using namespace std;
 
@@ -12,11 +11,10 @@ int main(){
     string keyword;
     cout<<"Aranacak ifadeyi giriniz (Enter the expression to search for) : ";
     cin>>keyword;
-    cout<<"Dosya Dizinini Giriniz (Enter the file's directory) :\n ";
+    cout<<"Dosya Dizinini Giriniz (Enter the file's directory) : ";
     cin>>_directory;
-
-
-    char *arr2 = ReadAllBytes(_directory);
-    int fileSize = get_file_size(_directory);
-    search(arr2, fileSize, keyword.c_str());
+    search(_directory,keyword.c_str());
+    cout<<"Arama işlemi tamamlandı (Search process completed)\n";
+    return 0;
+    
 }

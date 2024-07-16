@@ -1,14 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
 #include "../../Headers/Methods.h"
 
 
 using namespace std;
 
 int main(){
-    std::cout<<"\n\nİlk 2 baytını görmek istediğin dosyanın dizinini gir : ";
+    std::cout<<"\n\nİlk 2 baytını görmek istediğin dosyanın dizinini gir: ";
     string _directory;
     cin>>_directory;
 

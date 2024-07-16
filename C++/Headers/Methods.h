@@ -5,6 +5,10 @@
 #include <fstream>
 #include <string>
 #include <cstring>
+#include <filesystem>
+#include <vector>
+#include "Methods.h"
+namespace fs = std::filesystem;
 using namespace std;
 
 int get_file_size(string _directory){
@@ -15,6 +19,7 @@ int get_file_size(string _directory){
     file.seekg(0, ios::end); 
     int fileSize = file.tellg();
     return fileSize;
+
 }
 
 char* ReadAllBytes(string _directory){
@@ -37,36 +42,71 @@ char* ReadAllBytes(string _directory){
 
 
 
-void search(const char *arr2, int fileSize, const char *arr){
+void search(string path ,const char *arr){
 /*(TR) Dosya içerisinde arama yapar ve eğer aranan ifade bulunursa konumunu ekrana yazdırır.
 (EN) Searches the file and if the searched expression is found, prints its location to the screen.
 */
+    char* arr2 = ReadAllBytes(path); /*(TR) Dosyayı okuyup bir diziye atar ve dizi adresini döndürür.
+    (EN) Reads the file and assigns it to an array and returns the array address.
+    */
     bool flag = false; //(TR) Kontrol değişkeni | (EN) Control variable
+    int fileSize = get_file_size(path);
     int length = strlen(arr);
-    cout<<length<<endl;
+    //cout<<length<<endl;
 
     for (int i = 0; i < fileSize-length; i++)
     {
         char* temp = new char[length + 1]; //(TR) Statik bir dizi sabit bir ifade bekleyeceği için hata verir bu yüzden dinamik bir dizi oluşturuldu. 
         // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.
         
-        strncpy_s(temp,length+1, arr2 + i, length); //(TR) arr2 + i ifadesi arama yapılacak dosyanın i. karakterinden başlayarak length kadar karakteri temp dizisine kopyalar.
+        strncpy(temp, arr2 + i, length); //(TR) arr2 + i ifadesi arama yapılacak dosyanın i. karakterinden başlayarak length kadar karakteri temp dizisine kopyalar.
         // (EN) The expression arr2 + i copies the characters of the file to be searched starting from the i. character to the temp array for length characters.
         temp[length] = '\0';
         
         if(strcmp(arr, temp) == 0){
-            cout<<arr<<" ifadesi "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu\n";    
+            cout<<"\n";
+            cout<<path<<" >>>: "<<arr<<" ifadesi "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu\n";    
             flag = true;
+
             delete[] temp; // (TR) Bellek sızıntısını önlemek için temp dizisi silindi. 
             // (EN) The temp array is deleted to prevent memory leakage.
+            
             break;
         }
+
         delete[] temp;
+
     }
 
     if (!flag)
     {
-        cout<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
+
+        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
+
     }
+
 }
+
+
+vector<string> listFiles(string& path) {
+/*(TR) Klasördeki dosyaları listeler.
+(EN) Lists the files in the folder.
+*/
+    vector<string> directories;
+    int count = 0;
+   for (const auto& entry : fs::directory_iterator(path)) {
+        if (fs::is_regular_file(entry)) {  /*(TR) filesystema kütüphanesinin is_regular_file fonksiyonu ile dosya kontrolü yapılır.
+        (EN) 
+        */
+            cout << count+1<<" - "<<entry.path() << endl;
+            directories.push_back(entry.path().string());
+            count++;
+        }
+    }
+
+    cout << "Toplam(Totaly) " << count << " dosya bulundu(file found)\n Okuma Başarılı(Reading Succesful)\n\n---------------------------------\n\n";
+    
+    return directories;
+}
+
 #endif 
