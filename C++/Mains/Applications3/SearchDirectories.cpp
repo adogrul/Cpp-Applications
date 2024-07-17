@@ -15,7 +15,7 @@ int main() {
     cout<<"Aranacak ifadeyi giriniz (Enter the expression to search for) : ";
     cin>>keyword;
     cout<<"\n\n";
-    vector<string> directories =  listFiles(path);
+    vector<string> directories =  sub_dir_listFiles(path);
 
     for(const auto &entry : directories){
         string paths = entry;
