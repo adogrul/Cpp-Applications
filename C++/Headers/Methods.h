@@ -17,7 +17,7 @@ int get_file_size(string _directory){
 /*(TR) İmlecin konumunu döndürüp dosya boyutunu bulunur.
 (EN) Returns the position of the cursor and finds the file size.
 */
-    ifstream file(_directory, ios::out | ios::binary);
+    ifstream file(_directory, ios::in | ios::binary);
     file.seekg(0, ios::end); 
     int fileSize = file.tellg();
     return fileSize;
@@ -37,7 +37,8 @@ char* ReadAllBytes(const string& _directory){
 
     char* arr = new char[fileSize + 1]();//(TR) Statik bir dizi sabit bir ifade bekleyeceği için hata verir bu yüzden dinamik bir dizi oluşturuldu. 
     // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.
-    file.read(arr, fileSize);                               
+    file.read(arr, fileSize);
+    arr[fileSize] = '\0';
     file.close();
     return arr;
 }
@@ -50,6 +51,9 @@ void search(string path ,const char *arr){
     char* arr2 = ReadAllBytes(path); /*(TR) Dosyayı okuyup bir diziye atar ve dizi adresini döndürür.
     (EN) Reads the file and assigns it to an array and returns the array address.
     */
+    if (!arr2) {
+        return;
+    }
     bool flag = false; //(TR) Kontrol değişkeni | (EN) Control variable
     int fileSize = get_file_size(path);
     int length = strlen(arr);
@@ -72,6 +76,7 @@ void search(string path ,const char *arr){
         }
         delete[] temp;
     }
+    delete[] arr2;
     if (!flag)
     {
         cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
@@ -100,21 +105,7 @@ vector<string> sub_dir_listFiles(const string& path) {/*(TR) Klasördeki dosyala
 
 
 
-vector<string> list_PE_Files(const string& path) {
-    vector<string> directories;
-    try {
-        for (const auto& entry : fs::directory_iterator(path)) {
-            if (fs::is_regular_file(entry)) {
-                cout << entry.path() << endl;
-                directories.push_back(entry.path().string());
-            }
-        }
-    } catch (const filesystem::filesystem_error& ex) {
-        cerr << "Hata oluştu: " << ex.what() << endl;
-    }
-    cout << "Toplam " << directories.size() << " dosya bulundu\nOkuma Başarılı\n\n---------------------------------\n\n";
-    return directories;
-}
+
 
 
 #endif 

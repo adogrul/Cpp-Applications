@@ -22,4 +22,5 @@ int main() {
         search(paths, keyword.c_str());
     }
     cout<<"\n---------------------------------\n\n";
+    return 0;
 }
