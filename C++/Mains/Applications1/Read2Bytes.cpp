@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(){
-    std::cout<<"\n\nİlk 2 baytını görmek istediğin dosyanın dizinini gir: ";
+    std::cout<<"\n\nİlk 2 baytını görmek istediğin dosyanın dizinini gir(Enter the directory of the file whose first two bytes you entered ): ";
     string _directory;
     cin>>_directory;
 

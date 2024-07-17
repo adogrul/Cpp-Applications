@@ -10,9 +10,9 @@ using namespace std;
 
 int main(){
     string folderPath,keywords;
-    cout << "Enter the folder path: ";
+    cout << "Klasör Yolunu Giriniz(Enter the folder path): ";
     cin >> folderPath;
-    cout << "Enter the keywords: ";
+    cout << "Aranacak Kelimeyi Giriniz(Enter the keywords): ";
     cin >> keywords;
     vector <string> directories = sub_dir_listFiles(folderPath);
     for (auto &entry : directories){

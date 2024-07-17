@@ -68,7 +68,7 @@ void search(string path ,const char *arr){
         temp[length] = '\0';   
         if(strcmp(arr, temp) == 0){
             cout<<"\n";
-            cout<<path<<" >>>: "<<arr<<" ifadesi "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu\n";    
+            cout<<path<<" >>>: "<<arr<<" ifadesi(expression) "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu(found)\n";    
             flag = true;
             delete[] temp; // (TR) Bellek sızıntısını önlemek için temp dizisi silindi. 
             // (EN) The temp array is deleted to prevent memory leakage.     
@@ -79,7 +79,7 @@ void search(string path ,const char *arr){
     delete[] arr2;
     if (!flag)
     {
-        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
+        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı(expression not found)\n";
     }
 }
 
@@ -97,15 +97,10 @@ vector<string> sub_dir_listFiles(const string& path) {/*(TR) Klasördeki dosyala
             }
         }
     } catch (const filesystem::filesystem_error& ex) {
-        cerr << "Hata oluştu: " << ex.what() << endl;
+        cerr << "Hata oluştu(Error): " << ex.what() << endl;
     }
-    cout << "Toplam " << directories.size() << " dosya bulundu\nOkuma Başarılı\n\n---------------------------------\n\n";
+    cout << "Toplam(totally) " << directories.size() << " dosya bulundu(file found)\nOkuma Başarılı(Reading Successful)\n\n---------------------------------\n\n";
     return directories;
 }
-
-
-
-
-
 
 #endif 
