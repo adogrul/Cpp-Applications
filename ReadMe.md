@@ -1,10 +1,11 @@
 # File Handling and Searching Project
 
-This project consists of 4 different stages and one Header file: 
+This project consists of 5 different stages and one Header file: 
 ### [Application-1](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications1)
 ### [Application-2](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications2)
 ### [Application-3](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications3) 
 ### [Application-4](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications4)
+### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5)
 ### [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
 
 ## Application-1
@@ -40,6 +41,15 @@ Same as Application-2 but with more file outputs
 
 Application-4:
 When the program is executed, the search operation in Application 2 should be applied to all files (excluding subfolders) within a folder provided as an argument to the program. However, the search should only be conducted in files in Portable Executable (PE) format. Other files should be skipped and the user should be informed. To determine whether a file is in PE format, it is sufficient to check if the first 2 bytes are "MZ". Detailed validation procedures are not required for this example. Once a file is determined to be in PE format, the search for the "MALWARE" expression should be conducted only within sections that have the "executable" flag. The location along with the section name should be informed to the user if found.
+
+## Application-5
+This project is a C++ program that searches for specific keywords in PE (Portable Executable) files within a specified folder. The keywords are read from a CSV file and the search results are printed to the console.
+
+```
+Klasör Dizinini giriniz(Enter the folder path): C:\example\path
+CSV dosyasının dizinini giriniz(Enter the path of the CSV file): C:\example\path
+C:\example\file is not PE File
+```
 
 ## Header File
 
