@@ -44,12 +44,12 @@ When the program is executed, the search operation in Application 2 should be ap
 
 ## Application-5
 This project is a C++ program that searches for specific keywords in PE (Portable Executable) files within a specified folder. The keywords are read from a CSV file and the search results are printed to the console.
-´´´
+
+```
 Klasör Dizinini giriniz(Enter the folder path): C:\example\path
 CSV dosyasının dizinini giriniz(Enter the path of the CSV file): C:\example\path
 C:\example\file is not PE File
-...
-´´´
+```
 
 ## Header File
 
