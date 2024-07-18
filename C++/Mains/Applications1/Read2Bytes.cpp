@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../../Headers/Methods.h"
+#include "../../Headers/Methods.hpp"
 
 
 using namespace std;

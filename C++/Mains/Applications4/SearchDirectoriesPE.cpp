@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <vector>
 #include <fstream>
-#include "../../Headers/Methods.h"
+#include "../../Headers/Methods.hpp"
 namespace fs = std::filesystem;
 using namespace std;
 

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <string.h>
-#include "../../Headers/Methods.h"
+#include "../../Headers/Methods.hpp"
 using namespace std;
 
 int main(){
