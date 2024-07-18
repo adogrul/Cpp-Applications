@@ -1,6 +1,6 @@
 # File Handling and Searching Project
 
-This project consists of 4 different stages and one Header file: 
+This project consists of 5 different stages and one Header file: 
 ### [Application-1](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications1)
 ### [Application-2](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications2)
 ### [Application-3](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications3) 
