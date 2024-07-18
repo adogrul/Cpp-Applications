@@ -7,8 +7,9 @@
 #include <cstring>
 #include <filesystem>
 #include <vector>
-#include "Methods.h"
-
+#include <algorithm> // Add this line to include the <algorithm> header
+#include <windows.h>
+//
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -68,7 +69,7 @@ void search(string path ,const char *arr){
         temp[length] = '\0';   
         if(strcmp(arr, temp) == 0){
             cout<<"\n";
-            cout<<path<<" >>>: "<<arr<<" ifadesi(expression) "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu(found)\n";    
+            cout<<path<<" >>>: "<<arr<<" ifadesi "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu\n";    
             flag = true;
             delete[] temp; // (TR) Bellek sızıntısını önlemek için temp dizisi silindi. 
             // (EN) The temp array is deleted to prevent memory leakage.     
@@ -79,7 +80,7 @@ void search(string path ,const char *arr){
     delete[] arr2;
     if (!flag)
     {
-        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı(expression not found)\n";
+        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
     }
 }
 
@@ -97,10 +98,69 @@ vector<string> sub_dir_listFiles(const string& path) {/*(TR) Klasördeki dosyala
             }
         }
     } catch (const filesystem::filesystem_error& ex) {
-        cerr << "Hata oluştu(Error): " << ex.what() << endl;
+        cerr << "Hata oluştu: " << ex.what() << endl;
     }
-    cout << "Toplam(totally) " << directories.size() << " dosya bulundu(file found)\nOkuma Başarılı(Reading Successful)\n\n---------------------------------\n\n";
+    cout << "Toplam " << directories.size() << " dosya bulundu\nOkuma Başarılı\n\n---------------------------------\n\n";
     return directories;
 }
+
+bool isExecutableSection(const IMAGE_SECTION_HEADER& section) {
+    return section.Characteristics & IMAGE_SCN_MEM_EXECUTE;
+}
+
+void searchInPEFile(const std::string& filePath, const std::string& searchString) {
+    std::ifstream file(filePath, std::ios::binary | std::ios::ate);
+    if (!file) {
+        std::cerr << filePath << ": Dosya açma hatası" << std::endl;
+        return;
+    }
+
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+
+    std::vector<char> buffer(size);
+    if (!file.read(buffer.data(), size)) {
+        std::cerr << filePath << ": Dosya okuma hatası" << std::endl;
+        return;
+    }
+
+    PIMAGE_DOS_HEADER dosHeader = reinterpret_cast<PIMAGE_DOS_HEADER>(buffer.data());
+    if (dosHeader->e_magic != IMAGE_DOS_SIGNATURE) {
+        std::cerr << filePath << ": Geçerli PE dosyası değil" << std::endl;
+        return;
+    }
+
+    PIMAGE_NT_HEADERS ntHeaders = reinterpret_cast<PIMAGE_NT_HEADERS>(buffer.data() + dosHeader->e_lfanew);
+    if (ntHeaders->Signature != IMAGE_NT_SIGNATURE ||
+        (ntHeaders->FileHeader.Machine != IMAGE_FILE_MACHINE_I386 && ntHeaders->FileHeader.Machine != IMAGE_FILE_MACHINE_AMD64)) {
+        std::cerr << filePath << ": Geçerli PE dosyası değil" << std::endl;
+        return;
+    }
+
+    bool found = false;
+    for (int i = 0; i < ntHeaders->FileHeader.NumberOfSections; ++i) {
+        PIMAGE_SECTION_HEADER section = reinterpret_cast<PIMAGE_SECTION_HEADER>(
+            reinterpret_cast<char*>(ntHeaders) + sizeof(IMAGE_NT_HEADERS) + (i * sizeof(IMAGE_SECTION_HEADER))
+        );
+        if (isExecutableSection(*section)) {
+            char* sectionStart = buffer.data() + section->PointerToRawData;
+            char* sectionEnd = sectionStart + section->SizeOfRawData;
+            char* pos = std::search(sectionStart, sectionEnd, searchString.begin(), searchString.end());
+            if (pos != sectionEnd) {
+                std::cout << filePath << ": BULUNDU (" << std::distance(buffer.data(), pos) << " adresinde ve \"" 
+                          << std::string(reinterpret_cast<char*>(section->Name), 8) << "\" section'ı içerisinde)" << std::endl;
+                found = true;
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        std::cout << filePath << ": BULUNAMADI" << std::endl;
+    }
+}
+
+
+
 
 #endif 
