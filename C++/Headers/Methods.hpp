@@ -91,7 +91,7 @@ void search(const std::string& path, const char* arr) {
         }
 
         if (SearchInSection(sectionStart, sectionSize, arr)) {
-            std::cout << path << ":> BULUNDU (" << section.PointerToRawData << " adresinde ve \"" << section.Name << "\" bölümünde)" << std::endl;
+            std::cout << path << ":> BULUNDU (" << section.PointerToRawData << " adresinde ve \"" << section.Name << "\" section'ı içerisinde)" << std::endl;
             found = true;
         }
     }
