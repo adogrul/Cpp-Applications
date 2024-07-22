@@ -43,47 +43,65 @@ char* ReadAllBytes(const string& _directory){
     file.close();
     return arr;
 }
-
-
-void search(string path ,const char *arr){
-/*(TR) Dosya içerisinde arama yapar ve eğer aranan ifade bulunursa konumunu ekrana yazdırır.
-(EN) Searches the file and if the searched expression is found, prints its location to the screen.
-*/
-    char* arr2 = ReadAllBytes(path); /*(TR) Dosyayı okuyup bir diziye atar ve dizi adresini döndürür.
-    (EN) Reads the file and assigns it to an array and returns the array address.
-    */
-    if (!arr2) {
-        return;
-    }
-    bool flag = false; //(TR) Kontrol değişkeni | (EN) Control variable
-    int fileSize = get_file_size(path);
-    int length = strlen(arr);
-    //cout<<length<<endl;
-
-    for (int i = 0; i < fileSize-length; i++)
-    {
-        char* temp = new char[length + 1]; //(TR) Statik bir dizi sabit bir ifade bekleyeceği için hata verir bu yüzden dinamik bir dizi oluşturuldu. 
-        // (EN) A static array gives an error because it expects a constant expression, so a dynamic array is created.   
-        strncpy(temp, arr2 + i, length); //(TR) arr2 + i ifadesi arama yapılacak dosyanın i. karakterinden başlayarak length kadar karakteri temp dizisine kopyalar.
-        // (EN) The expression arr2 + i copies the characters of the file to be searched starting from the i. character to the temp array for length characters.
-        temp[length] = '\0';   
-        if(strcmp(arr, temp) == 0){
-            cout<<"\n";
-            cout<<path<<" >>>: "<<arr<<" ifadesi "<<i<<" : ("<<(void*)(arr2 + i)<<") adresinde bulundu\n";    
-            flag = true;
-            delete[] temp; // (TR) Bellek sızıntısını önlemek için temp dizisi silindi. 
-            // (EN) The temp array is deleted to prevent memory leakage.     
-            break;
-        }
-        delete[] temp;
-    }
-    delete[] arr2;
-    if (!flag)
-    {
-        cout<<path<<" >>>: "<<arr<<" ifadesi herhangi bir konumda bulunamadı\n";
-    }
+bool SearchInSection(const BYTE* sectionStart, DWORD sectionSize, const std::string& searchText) {
+    std::string sectionData(reinterpret_cast<const char*>(sectionStart), sectionSize);
+    return sectionData.find(searchText) != std::string::npos;
 }
 
+void search(const std::string& path, const char* arr) {
+    // Dosyayı okuyup bir diziye atar ve dizi adresini döndürür.
+    BYTE* arr2 = reinterpret_cast<BYTE*>(ReadAllBytes(path));
+    if (!arr2) {
+        std::cerr << "Dosya okunamadı." << std::endl;
+        return;
+    }
+
+    int fileSize = get_file_size(path);
+    if (fileSize <= 0) {
+        std::cerr << "Geçersiz dosya boyutu." << std::endl;
+        delete[] arr2;
+        return;
+    }
+
+    IMAGE_DOS_HEADER* dosHeader = reinterpret_cast<IMAGE_DOS_HEADER*>(arr2);
+    if (dosHeader->e_magic != IMAGE_DOS_SIGNATURE) {
+        std::cerr << "Geçersiz DOS header." << std::endl;
+        delete[] arr2;
+        return;
+    }
+
+    IMAGE_NT_HEADERS* ntHeaders = reinterpret_cast<IMAGE_NT_HEADERS*>(arr2 + dosHeader->e_lfanew);
+    if (ntHeaders->Signature != IMAGE_NT_SIGNATURE) {
+        std::cerr << "Geçersiz NT header." << std::endl;
+        delete[] arr2;
+        return;
+    }
+
+    IMAGE_SECTION_HEADER* sectionHeaders = IMAGE_FIRST_SECTION(ntHeaders);
+
+    bool found = false;
+    for (int i = 0; i < ntHeaders->FileHeader.NumberOfSections; ++i) {
+        IMAGE_SECTION_HEADER& section = sectionHeaders[i];
+        BYTE* sectionStart = arr2 + section.PointerToRawData;
+        DWORD sectionSize = section.SizeOfRawData;
+
+        if (sectionStart + sectionSize > arr2 + fileSize) {
+            std::cerr << "Bölüm dosya boyutunu aşıyor." << std::endl;
+            continue;
+        }
+
+        if (SearchInSection(sectionStart, sectionSize, arr)) {
+            std::cout << path << ":> BULUNDU (" << section.PointerToRawData << " adresinde ve \"" << section.Name << "\" bölümünde)" << std::endl;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        std::cout << path << ": BULUNAMADI " << std::endl;
+    }
+
+    delete[] arr2;
+}
 
 vector<string> sub_dir_listFiles(const string& path) {/*(TR) Klasördeki dosyaları listeler.
 (EN) Lists the files in the folder.
