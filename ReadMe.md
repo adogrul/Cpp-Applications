@@ -6,6 +6,7 @@ This project consists of 5 different stages and one Header file:
 ### [Application-3](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications3) 
 ### [Application-4](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications4)
 ### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5)
+### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications6)
 ### [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
 
 ## Application-1
@@ -50,6 +51,20 @@ Klasör Dizinini giriniz(Enter the folder path): C:\example\path
 CSV dosyasının dizinini giriniz(Enter the path of the CSV file): C:\example\path
 C:\example\file is not PE File
 ```
+## Application-6
+This C++ utility searches for specific keywords within files located in a given directory using the Knuth-Morris-Pratt (KMP) string matching algorithm. The program also handles reading keywords from a CSV file.
+he program will search for each keyword in each file within the specified directory and output the results.
+
+**Input Directory and CSV File Path**
+
+    - **Directory Path**: Enter the path to the directory containing the files you want to search.
+    - **CSV File Path**: Enter the path to the CSV file containing the keywords. Each line in the CSV file should be a separate keyword.
+    
+**Output**
+
+    - The program will list the files in the specified directory.
+    - It will search each file for the keywords listed in the CSV file.
+    - It will display any matches found for each keyword.
 
 ## Header File
 
