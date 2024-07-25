@@ -70,7 +70,7 @@ he program will search for each keyword in each file within the specified direct
 ## Application-6
 This project implements the Aho-Corasick algorithm for multi-pattern string matching. The program reads keywords from a CSV file and searches for these keywords in all files within a specified directory. The results show the occurrences of each keyword in each file.
 
-## Application-6
+## Application-7
 This project implements the Aho-Corasick algorithm for multi-pattern string matching. The program reads keywords from a CSV file and searches for these keywords in all files within a specified directory. The results show the occurrences of each keyword in each file.
 
 
