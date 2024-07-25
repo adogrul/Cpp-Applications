@@ -7,6 +7,7 @@ This project consists of 5 different stages and one Header file:
 ### [Application-4](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications4)
 ### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5)
 ### [Application-6](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications6)
+### [Application-7](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications7)
 ### [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
 
 ## Application-1
@@ -65,6 +66,13 @@ he program will search for each keyword in each file within the specified direct
     - The program will list the files in the specified directory.
     - It will search each file for the keywords listed in the CSV file.
     - It will display any matches found for each keyword.
+
+## Application-6
+This project implements the Aho-Corasick algorithm for multi-pattern string matching. The program reads keywords from a CSV file and searches for these keywords in all files within a specified directory. The results show the occurrences of each keyword in each file.
+
+## Application-6
+This project implements the Aho-Corasick algorithm for multi-pattern string matching. The program reads keywords from a CSV file and searches for these keywords in all files within a specified directory. The results show the occurrences of each keyword in each file.
+
 
 ## Header File
 
