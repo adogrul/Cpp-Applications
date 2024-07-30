@@ -5,10 +5,6 @@
 #include "Methods.hpp"
 #define d 256
 
-/* pat -> pattern
-	txt -> text
-	q -> A prime number
-*/
 void search(string keywords, string filePath, int q)
 {
     char* pat = (char*)keywords.c_str();
