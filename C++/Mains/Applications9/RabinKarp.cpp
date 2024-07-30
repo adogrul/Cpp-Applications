@@ -1,5 +1,4 @@
-/* Following program is a C++ implementation of Rabin Karp
-Algorithm given in the CLRS book */
+
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
@@ -7,7 +6,6 @@ Algorithm given in the CLRS book */
 #include "../../Headers/RabinKarp.hpp"
 using namespace std;
 
-/* Driver code */
 int main()
 {
     int q = 7; // A prime number
