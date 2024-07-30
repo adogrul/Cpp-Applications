@@ -8,6 +8,8 @@ This project consists of 5 different stages and one Header file:
 ### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5)
 ### [Application-6](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications6)
 ### [Application-7](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications7)
+### [Application-8](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications8)
+### [Application-9](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications9)
 ### [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
 
 ## Application-1
