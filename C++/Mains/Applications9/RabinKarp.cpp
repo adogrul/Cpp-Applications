@@ -42,5 +42,3 @@ int main()
     return 0;
 }
 
-// pat : keywords of CSV file
-// txt : file content
