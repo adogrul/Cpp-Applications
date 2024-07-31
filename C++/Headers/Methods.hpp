@@ -178,7 +178,33 @@ void searchInPEFile(const std::string& filePath, const std::string& searchString
     }
 }
 
+// Function to read and return NT Header Signature
+std::string getNTHeaderSignature(const std::string &filePath) {
+    std::ifstream file(filePath, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open the file: " << filePath << std::endl;
+        return "";
+    }
 
+    IMAGE_DOS_HEADER dosHeader;
+    file.read(reinterpret_cast<char*>(&dosHeader), sizeof(dosHeader));
+
+    if (dosHeader.e_magic != 0x5A4D) { // Check for 'MZ' signature
+        std::cerr <<filePath<< " - Invalid DOS header signature.\n";
+        return "";
+    }
+
+    file.seekg(dosHeader.e_lfanew, std::ios::beg);
+
+    uint32_t ntSignature;
+    file.read(reinterpret_cast<char*>(&ntSignature), sizeof(ntSignature));
+
+    if (ntSignature != 0x00004550) { // Check for 'PE\0\0' signature
+        std::cerr <<filePath<< "Invalid NT header signature." << std::endl;
+        return "";
+    }
+    return std::string(reinterpret_cast<char*>(&ntSignature), sizeof(ntSignature));
+}
 
 
 #endif 
