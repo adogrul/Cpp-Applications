@@ -5,12 +5,23 @@
 #include "Methods.hpp"
 #define d 256
 
-void search(string keywords, string filePath, int q)
+/* pat -> pattern
+	txt -> text
+	q -> A prime number
+*/
+using namespace std;
+
+// d is the number of characters in the input alphabet
+#define d 256
+
+/* pat -> pattern
+	txt -> text
+	q -> A prime number
+*/
+void RKsearch(string& pat, char * txt, int q)
 {
-    char* pat = (char*)keywords.c_str();
-	int M = strlen(keywords.c_str());
-	int N = get_file_size(filePath);
-    char *txt = ReadAllBytes(filePath);
+	int M = strlen(pat.c_str());
+	int N = strlen(txt);
 	int i, j;
 	int p = 0; // hash value for pattern
 	int t = 0; // hash value for txt
