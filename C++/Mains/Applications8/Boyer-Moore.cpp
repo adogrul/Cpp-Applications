@@ -8,7 +8,6 @@
 using namespace std;
 
 
-/* Driver code */
 int main() {
     string directory;
     cout << "Klasör yolunu gir: ";
@@ -30,11 +29,24 @@ int main() {
         return 1;
     }
 
-    for (const auto &entry : dir_arr) {
-        for (const auto &keyword : keywords) {
-            search(entry, keyword);
+    char* arr2 = ReadAllBytes(csvPath);
+    for (auto &entry : dir_arr)
+	{
+        char* arr = ReadAllBytes(entry);	
+        if(arr[0]='M'&&arr[1]=='Z')
+		{
+			std::string ntSignature = getNTHeaderSignature(entry);
+			if (!ntSignature.empty()) 
+			{
+				std::cout << std::endl;
+				BMsearch(ntSignature,arr2);
+				std::cout <<entry<< "\nNT header signature found (ASCII):"<<ntSignature;
+				std::cout <<"\n\n";
+        	}
         }
     }
 
-    return 0;
+	return 0;
+		
+		//BMsearch(text, pattern);
 }
