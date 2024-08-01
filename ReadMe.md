@@ -1,16 +1,7 @@
 # File Handling and Searching Project
 
 This project consists of 5 different stages and one Header file: 
-### [Application-1](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications1)
-### [Application-2](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications2)
-### [Application-3](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications3) 
-### [Application-4](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications4)
-### [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5)
-### [Application-6](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications6)
-### [Application-7](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications7)
-### [Application-8](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications8)
-### [Application-9](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications9)
-### [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
+### [Application-1](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications1) , [Application-2](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications2) ,  [Application-3](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications3) , [Application-4](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications4) , [Application-5](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications5) , [Application-6](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications6) , [Application-7](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications7) , [Application-8](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications8) , [Application-9](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Mains/Applications9) , [Header File](https://github.com/adogrul/Cpp-Applications/tree/main/C%2B%2B/Headers)
 
 ## Application-1
 
