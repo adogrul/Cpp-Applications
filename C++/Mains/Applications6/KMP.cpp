@@ -3,31 +3,40 @@
 
 int main()
 {
-	std::string path;
-    std::cout<<"Klasör Yolu Giriniz: ";
-    std:cin>>path;
-    string csvFilePath;
-    cout << "CSV dosyasının dizinini giriniz(Enter the path of the CSV file): ";
-    cin >> csvFilePath;
-    ifstream csvFile(csvFilePath);
+    string directory;
+    cout << "Klasör yolunu gir: ";
+    cin >> directory;
+    string csvPath;
+    cout << "CSV dosyasının yolunu gir: ";
+    cin >> csvPath;
+    vector<string> dir_arr = sub_dir_listFiles(directory);
     vector<string> keywords;
+    ifstream csvFile(csvPath);
     if (csvFile.is_open()) {
         string line;
         while (getline(csvFile, line)) {
-            keywords.push_back(line); // Her satırı anahtar kelime olarak vector'e ekle
+            keywords.push_back(line);
         }
         csvFile.close();
     } else {
-        cerr << "CSV dosyası açılamadı!(CSV file can not open)" << endl;
+        cerr << "CSV dosyası açılamadı!" << endl;
         return 1;
     }
 
-    vector<string> paths = sub_dir_listFiles(path);
-     for(auto &entry : paths){
-        std::string filePath = entry;
-        for (auto &keyword : keywords) {
-            KMPSearch(keyword, filePath);
-        break;
+    char* arr2 = ReadAllBytes(csvPath);
+    for (auto &entry : dir_arr)
+	{
+        char* arr = ReadAllBytes(entry);	
+        if(arr[0]='M'&&arr[1]=='Z')
+		{
+			std::string ntSignature = getNTHeaderSignature(entry);
+			if (!ntSignature.empty()) 
+			{
+				std::cout << std::endl;
+				std::cout <<entry<< "\nNT header signature found (ASCII):"<<ntSignature<<endl;
+				KMPSearch(ntSignature,arr,entry);
+				std::cout <<"\n\n";
+        	}
         }
     }
 	return 0;

@@ -4,7 +4,7 @@
 #include "Methods.hpp"
 void computeLPSArray(const std::string& arr, int M, int* lps);
 
-void KMPSearch( std::string& arr, std::string path)
+void KMPSearch( std::string& pattern, char* text,std::string path)
 {
 	char* arr2 = (ReadAllBytes(path));
     // PathArr dizisinin bellekte yeterli yer kaplaması için ReadAllBytes fonksiyonunun doğru çalıştığından emin olun
@@ -12,11 +12,8 @@ void KMPSearch( std::string& arr, std::string path)
         std::cerr << "Failed to read file" << std::endl;
         return;
     }
-
-    int M = arr.size(); // M, anahtar kelimenin boyutu
+    int M = strlen(text); // M, anahtar kelimenin boyutu
     int N = get_file_size(path); // Dosya boyutunu doğru hesaplayın
-
-	std::cout<<M<<" "<<N<<std::endl;
     if (M <= 0 || N <= 0) {
         std::cerr << "Invalid size for pattern or text" << std::endl;
         delete[] arr2; // Belleği temizleyin
@@ -27,21 +24,21 @@ void KMPSearch( std::string& arr, std::string path)
     int* lps = new int[M];
     
     // Preprocess the pattern (calculate lps[] array)
-    computeLPSArray(arr, M, lps);
+    computeLPSArray(pattern, M, lps);
 
     int i = 0; // index for txt[]
     int j = 0; // index for pat[]
     while ((N - i) >= (M - j)) {
-        if (arr[j] == arr2[i]) {
+        if (pattern[j] == arr2[i]) {
             j++;
             i++;
         }
 
         if (j == M) {
-            std::cout << "Found pattern at index " << i - j << std::endl;
+            std::cout << "İfade  (found pattern at )" << i - j <<" içinde bulundu"<< std::endl;
             j = lps[j - 1];
         }
-        else if (i < N && arr[j] != arr2[i]) {
+        else if (i < N && pattern[j] != arr2[i]) {
             if (j != 0)
                 j = lps[j - 1];
             else
@@ -75,9 +72,3 @@ void computeLPSArray(const std::string& arr, int M, int* lps)
         }
     }
 }
-
-/*
-	1- Dosyanın bitlerini oku (Read All Bytes)
-	2- CSV keywordsleri oku
-	3- Dosya içerisinde Bu algoritma ile arama yap
-*/
